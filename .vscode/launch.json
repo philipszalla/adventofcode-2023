@@ -10,7 +10,7 @@
       "request": "launch",
       "mode": "auto",
       "program": "${workspaceFolder}/main.go",
-      "args": ["1", "day1/example.txt"]
+      "args": ["1", "day1/example.txt", "day1/example2.txt"]
     }
   ]
 }
