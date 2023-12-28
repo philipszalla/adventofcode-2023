@@ -1,7 +1,26 @@
 package main
 
-import "github.com/philipszalla/adventofcode-2023/day5"
+import (
+	"os"
+	"strconv"
+
+	"github.com/philipszalla/adventofcode-2023/day1"
+	"github.com/philipszalla/adventofcode-2023/day5"
+)
 
 func main() {
-	day5.Run()
+	selectedDay := 0
+	if len(os.Args) > 1 {
+		selectedDay, _ = strconv.Atoi(os.Args[1])
+	}
+
+	switch selectedDay {
+	case 1:
+		day1.Run()
+	case 5:
+		day5.Run()
+	default:
+		println("Unknown option")
+	}
+
 }

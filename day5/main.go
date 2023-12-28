@@ -10,13 +10,13 @@ import (
 )
 
 func Run() {
-	filename := "day5/example.txt"
-	if len(os.Args) > 1 {
-		filename = os.Args[1]
+	filepath := ""
+	if len(os.Args) > 2 {
+		filepath = os.Args[2]
 	}
 
-	fmt.Println("Loading file", filename)
-	seeds, mappers := ReadFile(filename)
+	fmt.Println("Loading file", filepath)
+	seeds, mappers := ReadFile(filepath)
 
 	// Part 1
 	fmt.Println("Starting part 1...")
