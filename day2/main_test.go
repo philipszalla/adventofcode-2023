@@ -19,3 +19,15 @@ func TestPart1(t *testing.T) {
 		t.Fatalf("Expected result is %d. But got %d", expectedResult, result)
 	}
 }
+
+var expectedResult2 = 2286
+
+func TestPart2(t *testing.T) {
+	games := parse(example)
+
+	result := part2(games)
+
+	if result != expectedResult2 {
+		t.Fatalf("Expected result is %d. But got %d", expectedResult2, result)
+	}
+}
