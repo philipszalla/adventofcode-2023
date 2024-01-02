@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/philipszalla/adventofcode-2023/day1"
+	"github.com/philipszalla/adventofcode-2023/day2"
 	"github.com/philipszalla/adventofcode-2023/day5"
 )
 
@@ -17,6 +18,8 @@ func main() {
 	switch selectedDay {
 	case 1:
 		day1.Run()
+	case 2:
+		day2.Run()
 	case 5:
 		day5.Run()
 	default:
