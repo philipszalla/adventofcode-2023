@@ -25,14 +25,14 @@ func TestPart1(t *testing.T) {
 	}
 }
 
-// var expectedResult2 = 4361
+var expectedResult2 = 467835
 
-// func TestPart2(t *testing.T) {
-// 	data := parse(example)
+func TestPart2(t *testing.T) {
+	data := parse(example)
 
-// 	result := part2(data)
+	result := part2(data)
 
-// 	if result != expectedResult2 {
-// 		t.Fatalf("Expected result is %d. But got %d", expectedResult2, result)
-// 	}
-// }
+	if result != expectedResult2 {
+		t.Fatalf("Expected result is %d. But got %d", expectedResult2, result)
+	}
+}
