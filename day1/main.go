@@ -5,7 +5,8 @@ import (
 	"os"
 	"slices"
 	"strings"
-	"time"
+
+	"github.com/philipszalla/adventofcode-2023/utils"
 )
 
 func Run() {
@@ -17,34 +18,13 @@ func Run() {
 	}
 
 	fmt.Println("Loading file", filepath)
-	lines := ReadFile(filepath)
+	lines := utils.ReadFile(filepath)
 
 	fmt.Println("Loading file", filepath2)
-	lines2 := ReadFile(filepath2)
+	lines2 := utils.ReadFile(filepath2)
 
-	// Part 1
-	fmt.Println("Starting part 1...")
-
-	start := time.Now()
-
-	result := part1(lines)
-
-	end := time.Now()
-	elapsed := end.Sub(start)
-
-	fmt.Printf("Finished processing! Result: %d, Elapsed time: %s\n", result, elapsed)
-
-	// Part 2
-	fmt.Println("Starting part 2...")
-
-	start = time.Now()
-
-	result = part2(lines2)
-
-	end = time.Now()
-	elapsed = end.Sub(start)
-
-	fmt.Printf("Finished processing! Result: %d, Elapsed time: %s\n", result, elapsed)
+	utils.RunPart(part1, 1, lines)
+	utils.RunPart(part2, 2, lines2)
 }
 
 var asciiCodeZero = 48

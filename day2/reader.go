@@ -1,27 +1,11 @@
 package day2
 
 import (
-	"os"
 	"strconv"
 	"strings"
 )
 
-func ReadFile(filename string) []Game {
-	bytes, err := os.ReadFile(filename)
-	if err != nil {
-		panic(err)
-	}
-
-	content := string(bytes)
-	content = strings.ReplaceAll(content, "\r", "")
-
-	games := parse(content)
-
-	return games
-}
-
-func parse(content string) []Game {
-	lines := strings.Split(content, "\n")
+func Parse(lines []string) []Game {
 
 	games := []Game{}
 

@@ -1,6 +1,9 @@
 package day3
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 var example = `467..114..
 ...*......
@@ -16,7 +19,7 @@ var example = `467..114..
 var expectedResult = 4361
 
 func TestPart1(t *testing.T) {
-	data := parse(example)
+	data := strings.Split(example, "\n")
 
 	result := part1(data)
 
@@ -28,7 +31,7 @@ func TestPart1(t *testing.T) {
 var expectedResult2 = 467835
 
 func TestPart2(t *testing.T) {
-	data := parse(example)
+	data := strings.Split(example, "\n")
 
 	result := part2(data)
 

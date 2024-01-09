@@ -1,6 +1,9 @@
 package day5
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 var example = `seeds: 79 14 55 13
 
@@ -39,9 +42,8 @@ humidity-to-location map:
 var expectedResult = 35
 
 func TestPart1(t *testing.T) {
-	seeds, mappers := parse(example)
-
-	result := part1(seeds, mappers)
+	lines := strings.Split(example, "\n")
+	result := part1(lines)
 
 	if result != expectedResult {
 		t.Fatalf("Expected result is %d. But got %d", expectedResult, result)
@@ -51,9 +53,8 @@ func TestPart1(t *testing.T) {
 var expectedResult2 = 46
 
 func TestPart2(t *testing.T) {
-	seeds, mappers := parse(example)
-
-	result := part2(seeds, mappers)
+	lines := strings.Split(example, "\n")
+	result := part2(lines)
 
 	if result != expectedResult2 {
 		t.Fatalf("Expected result is %d. But got %d", expectedResult2, result)

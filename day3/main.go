@@ -5,7 +5,8 @@ import (
 	"os"
 	"slices"
 	"sync"
-	"time"
+
+	"github.com/philipszalla/adventofcode-2023/utils"
 )
 
 func Run() {
@@ -15,31 +16,10 @@ func Run() {
 	}
 
 	fmt.Println("Loading file", filepath)
-	lines := ReadFile(filepath)
+	lines := utils.ReadFile(filepath)
 
-	// Part 1
-	fmt.Println("Starting part 1...")
-
-	start := time.Now()
-
-	result := part1(lines)
-
-	end := time.Now()
-	elapsed := end.Sub(start)
-
-	fmt.Printf("Finished processing! Result: %d, Elapsed time: %s\n", result, elapsed)
-
-	// Part 2
-	fmt.Println("Starting part 2...")
-
-	start = time.Now()
-
-	result = part2(lines)
-
-	end = time.Now()
-	elapsed = end.Sub(start)
-
-	fmt.Printf("Finished processing! Result: %d, Elapsed time: %s\n", result, elapsed)
+	utils.RunPart(part1, 1, lines)
+	utils.RunPart(part2, 2, lines)
 }
 
 var symbols = []rune{'.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}

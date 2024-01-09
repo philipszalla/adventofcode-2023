@@ -1,28 +1,11 @@
 package day5
 
 import (
-	"os"
 	"strconv"
 	"strings"
 )
 
-func ReadFile(filename string) ([]int, []Mapper) {
-	bytes, err := os.ReadFile(filename)
-	if err != nil {
-		panic(err)
-	}
-
-	content := string(bytes)
-	content = strings.ReplaceAll(content, "\r", "")
-
-	seeds, maps := parse(content)
-
-	return seeds, maps
-}
-
-func parse(content string) ([]int, []Mapper) {
-	lines := strings.Split(content, "\n")
-
+func Parse(lines []string) ([]int, []Mapper) {
 	seeds := []int{}
 	maps := []Mapper{}
 

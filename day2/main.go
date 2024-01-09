@@ -3,7 +3,8 @@ package day2
 import (
 	"fmt"
 	"os"
-	"time"
+
+	"github.com/philipszalla/adventofcode-2023/utils"
 )
 
 func Run() {
@@ -13,34 +14,15 @@ func Run() {
 	}
 
 	fmt.Println("Loading file", filepath)
-	games := ReadFile(filepath)
+	lines := utils.ReadFile(filepath)
 
-	// Part 1
-	fmt.Println("Starting part 1...")
-
-	start := time.Now()
-
-	result := part1(games)
-
-	end := time.Now()
-	elapsed := end.Sub(start)
-
-	fmt.Printf("Finished processing! Result: %d, Elapsed time: %s\n", result, elapsed)
-
-	// Part 2
-	fmt.Println("Starting part 2...")
-
-	start = time.Now()
-
-	result = part2(games)
-
-	end = time.Now()
-	elapsed = end.Sub(start)
-
-	fmt.Printf("Finished processing! Result: %d, Elapsed time: %s\n", result, elapsed)
+	utils.RunPart(part1, 1, lines)
+	utils.RunPart(part2, 2, lines)
 }
 
-func part1(games []Game) int {
+func part1(lines []string) int {
+	games := Parse(lines)
+
 	existingCubes := CubeSet{12, 13, 14}
 
 	sum := 0
@@ -73,7 +55,9 @@ func part1(games []Game) int {
 	return sum
 }
 
-func part2(games []Game) int {
+func part2(lines []string) int {
+	games := Parse(lines)
+
 	sum := 0
 
 	for _, game := range games {

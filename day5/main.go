@@ -6,7 +6,8 @@ import (
 	"os"
 	"slices"
 	"sync"
-	"time"
+
+	"github.com/philipszalla/adventofcode-2023/utils"
 )
 
 func Run() {
@@ -16,34 +17,15 @@ func Run() {
 	}
 
 	fmt.Println("Loading file", filepath)
-	seeds, mappers := ReadFile(filepath)
+	lines := utils.ReadFile(filepath)
 
-	// Part 1
-	fmt.Println("Starting part 1...")
-
-	start := time.Now()
-
-	lowestValue := part1(seeds, mappers)
-
-	end := time.Now()
-	elapsed := end.Sub(start)
-
-	fmt.Printf("Finished processing! Result: %d, Elapsed time: %s\n", lowestValue, elapsed)
-
-	// Part 2
-	fmt.Println("Starting part 2...")
-
-	start = time.Now()
-
-	lowestValue = part2(seeds, mappers)
-
-	end = time.Now()
-	elapsed = end.Sub(start)
-
-	fmt.Printf("Finished processing! Result: %d, Elapsed time: %s\n", lowestValue, elapsed)
+	utils.RunPart(part1, 1, lines)
+	utils.RunPart(part2, 2, lines)
 }
 
-func part2(seeds []int, mappers []Mapper) int {
+func part2(lines []string) int {
+	seeds, mappers := Parse(lines)
+
 	if len(seeds)%2 != 0 {
 		panic("Seed count must be even")
 	}
@@ -93,7 +75,9 @@ func processSeedRange(seedStart int, length int, mappers []Mapper) int {
 	return int(lowestValue)
 }
 
-func part1(seeds []int, mappers []Mapper) int {
+func part1(lines []string) int {
+	seeds, mappers := Parse(lines)
+
 	lowestValue := math.Inf(0)
 
 	for _, seed := range seeds {
