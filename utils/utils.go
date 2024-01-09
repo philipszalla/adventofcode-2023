@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"testing"
 	"time"
 )
 
@@ -20,6 +21,16 @@ func RunPart(fn partFn, part int, lines []string) {
 	elapsed := end.Sub(start)
 
 	fmt.Printf("Finished processing! Result: %d, Elapsed time: %s\n", result, elapsed)
+}
+
+func TestPart(t *testing.T, fn partFn, content string, expectedResult int) {
+	lines := strings.Split(content, "\n")
+
+	result := fn(lines)
+
+	if result != expectedResult {
+		t.Fatalf("Expected result is %d. But got %d", expectedResult, result)
+	}
 }
 
 func ReadFile(filename string) []string {

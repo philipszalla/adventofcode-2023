@@ -1,8 +1,9 @@
 package day5
 
 import (
-	"strings"
 	"testing"
+
+	"github.com/philipszalla/adventofcode-2023/utils"
 )
 
 var example = `seeds: 79 14 55 13
@@ -39,24 +40,10 @@ humidity-to-location map:
 60 56 37
 56 93 4`
 
-var expectedResult = 35
-
 func TestPart1(t *testing.T) {
-	lines := strings.Split(example, "\n")
-	result := part1(lines)
-
-	if result != expectedResult {
-		t.Fatalf("Expected result is %d. But got %d", expectedResult, result)
-	}
+	utils.TestPart(t, part1, example, 35)
 }
 
-var expectedResult2 = 46
-
 func TestPart2(t *testing.T) {
-	lines := strings.Split(example, "\n")
-	result := part2(lines)
-
-	if result != expectedResult2 {
-		t.Fatalf("Expected result is %d. But got %d", expectedResult2, result)
-	}
+	utils.TestPart(t, part2, example, 46)
 }

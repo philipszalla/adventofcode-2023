@@ -1,8 +1,9 @@
 package day3
 
 import (
-	"strings"
 	"testing"
+
+	"github.com/philipszalla/adventofcode-2023/utils"
 )
 
 var example = `467..114..
@@ -16,26 +17,10 @@ var example = `467..114..
 ...$.*....
 .664.598..`
 
-var expectedResult = 4361
-
 func TestPart1(t *testing.T) {
-	data := strings.Split(example, "\n")
-
-	result := part1(data)
-
-	if result != expectedResult {
-		t.Fatalf("Expected result is %d. But got %d", expectedResult, result)
-	}
+	utils.TestPart(t, part1, example, 4361)
 }
 
-var expectedResult2 = 467835
-
 func TestPart2(t *testing.T) {
-	data := strings.Split(example, "\n")
-
-	result := part2(data)
-
-	if result != expectedResult2 {
-		t.Fatalf("Expected result is %d. But got %d", expectedResult2, result)
-	}
+	utils.TestPart(t, part2, example, 467835)
 }
