@@ -10,6 +10,7 @@ import (
 	"github.com/philipszalla/adventofcode-2023/day4"
 	"github.com/philipszalla/adventofcode-2023/day5"
 	"github.com/philipszalla/adventofcode-2023/day6"
+	"github.com/philipszalla/adventofcode-2023/day7"
 )
 
 func main() {
@@ -31,6 +32,8 @@ func main() {
 		day5.Run()
 	case 6:
 		day6.Run()
+	case 7:
+		day7.Run()
 	default:
 		println("Unknown option")
 	}
