@@ -5,22 +5,22 @@ import (
 	"strings"
 )
 
-func parseLine(line string) (int, []int, []int) {
+func parseCard(line string) Card {
 	winning := []int{}
 	yours := []int{}
 
-	if !strings.HasPrefix(line, "Card ") {
-		return 0, winning, yours
+	if !strings.HasPrefix(line, "Card") {
+		return Card{0, winning, yours}
 	}
 
-	line = strings.TrimPrefix(line, "Card ")
+	line = strings.TrimPrefix(line, "Card")
 
-	cardParts := strings.Split(line, ": ")
-	card, _ := strconv.Atoi(cardParts[0])
+	cardParts := strings.Split(line, ":")
+	id, _ := strconv.Atoi(strings.TrimSpace(cardParts[0]))
 
-	values := strings.Split(cardParts[1], " | ")
+	values := strings.Split(cardParts[1], "|")
 
-	winningParts := strings.Split(values[0], " ")
+	winningParts := strings.Split(strings.TrimSpace(values[0]), " ")
 	for _, part := range winningParts {
 		value, err := strconv.Atoi(part)
 		if err != nil {
@@ -30,7 +30,7 @@ func parseLine(line string) (int, []int, []int) {
 		winning = append(winning, value)
 	}
 
-	yoursParts := strings.Split(values[1], " ")
+	yoursParts := strings.Split(strings.TrimSpace(values[1]), " ")
 	for _, part := range yoursParts {
 		value, err := strconv.Atoi(part)
 		if err != nil {
@@ -40,5 +40,5 @@ func parseLine(line string) (int, []int, []int) {
 		yours = append(yours, value)
 	}
 
-	return card, winning, yours
+	return Card{id, winning, yours}
 }

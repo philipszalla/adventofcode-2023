@@ -2,21 +2,16 @@ package day4
 
 import (
 	"slices"
-	"strings"
 	"sync"
 )
 
 func processLine(line string) int {
-	if !strings.HasPrefix(line, "Card ") {
-		return 0
-	}
-
-	_, winning, yours := parseLine(line)
+	game := parseCard(line)
 
 	points := 0
 
-	for _, your := range yours {
-		if !slices.Contains(winning, your) {
+	for _, your := range game.yours {
+		if !slices.Contains(game.winning, your) {
 			continue
 		}
 

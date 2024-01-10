@@ -17,5 +17,5 @@ func Run() {
 	lines := utils.ReadFile(filepath)
 
 	utils.RunPart(part1, 1, lines)
-	// utils.RunPart(part2, 2, lines)
+	utils.RunPart(part2, 2, lines)
 }

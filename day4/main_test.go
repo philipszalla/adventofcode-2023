@@ -17,6 +17,6 @@ func TestPart1(t *testing.T) {
 	utils.TestPart(t, part1, example, 13)
 }
 
-// func TestPart2(t *testing.T) {
-// 	utils.TestPart(t, part2, example, 467835)
-// }
+func TestPart2(t *testing.T) {
+	utils.TestPart(t, part2, example, 30)
+}
