@@ -9,7 +9,7 @@ func parse(lines []string) ([]int, []int) {
 	if len(lines) != 2 {
 		return []int{}, []int{}
 	}
-	numberRegexp := regexp.MustCompile("\\d+")
+	numberRegexp := regexp.MustCompile(`\d+`)
 
 	timeStrings := numberRegexp.FindAllString(lines[0], -1)
 	times := []int{}
