@@ -3,6 +3,7 @@ package day7
 import (
 	"fmt"
 	"os"
+	"slices"
 	"sort"
 
 	"github.com/philipszalla/adventofcode-2023/utils"
@@ -20,36 +21,62 @@ func Run() {
 	utils.RunPart(part1, 1, lines)
 }
 
-func part1(lines []string) int {
-	hands := parse(lines)
+var cardValues = []rune{'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'}
+var cardValues2 = []rune{'J', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'Q', 'K', 'A'}
 
-	sort.SliceStable(hands, func(i, j int) bool {
-		a := hands[i]
-		b := hands[j]
+func sortHands(hands []Hand, i, j int, values []rune) bool {
+	a := hands[i]
+	b := hands[j]
 
-		// Sort by weight
-		if a.weight != b.weight {
-			return a.weight < b.weight
+	// Sort by weight
+	if a.weight != b.weight {
+		return a.weight < b.weight
+	}
+
+	// Sort by first higher card
+	aCards := []rune(a.cards)
+	bCards := []rune(b.cards)
+	for index, aCard := range aCards {
+		bCard := bCards[index]
+
+		aValue := slices.Index(values, aCard)
+		bValue := slices.Index(values, bCard)
+
+		if aValue == bValue {
+			continue
 		}
 
-		// Sort by first higher card
-		for index, aCard := range a.cards {
-			bCard := b.cards[index]
+		return aValue < bValue
+	}
 
-			if aCard == bCard {
-				continue
-			}
+	return false
+}
 
-			return aCard < bCard
-		}
-
-		return false
-	})
-
+func sum(hands []Hand) int {
 	sum := 0
 	for index, hand := range hands {
-		sum += hand.bid*index + 1
+		sum += hand.bid * (index + 1)
 	}
 
 	return sum
+}
+
+func part1(lines []string) int {
+	hands := parse(lines, false)
+
+	sort.SliceStable(hands, func(i, j int) bool {
+		return sortHands(hands, i, j, cardValues)
+	})
+
+	return sum(hands)
+}
+
+func part2(lines []string) int {
+	hands := parse(lines, true)
+
+	sort.SliceStable(hands, func(i, j int) bool {
+		return sortHands(hands, i, j, cardValues2)
+	})
+
+	return sum(hands)
 }

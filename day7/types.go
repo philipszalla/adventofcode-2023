@@ -1,8 +1,7 @@
 package day7
 
 type Hand struct {
-	name   string
-	cards  []int
+	cards  string
 	bid    int
 	weight int
 }
