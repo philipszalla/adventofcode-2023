@@ -19,6 +19,7 @@ func Run() {
 	lines := utils.ReadFile(filepath)
 
 	utils.RunPart(part1, 1, lines)
+	utils.RunPart(part2, 2, lines)
 }
 
 var cardValues = []rune{'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'}

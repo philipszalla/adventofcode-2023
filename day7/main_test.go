@@ -15,3 +15,7 @@ QQQJA 483`
 func TestPart1(t *testing.T) {
 	utils.TestPart(t, part1, example, 6440)
 }
+
+func TestPart2(t *testing.T) {
+	utils.TestPart(t, part2, example, 5905)
+}
