@@ -4,13 +4,13 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/philipszalla/adventofcode-2023/day1"
-	"github.com/philipszalla/adventofcode-2023/day2"
-	"github.com/philipszalla/adventofcode-2023/day3"
-	"github.com/philipszalla/adventofcode-2023/day4"
-	"github.com/philipszalla/adventofcode-2023/day5"
-	"github.com/philipszalla/adventofcode-2023/day6"
-	"github.com/philipszalla/adventofcode-2023/day7"
+	"github.com/philipszalla/adventofcode-2023/day01"
+	"github.com/philipszalla/adventofcode-2023/day02"
+	"github.com/philipszalla/adventofcode-2023/day03"
+	"github.com/philipszalla/adventofcode-2023/day04"
+	"github.com/philipszalla/adventofcode-2023/day05"
+	"github.com/philipszalla/adventofcode-2023/day06"
+	"github.com/philipszalla/adventofcode-2023/day07"
 )
 
 func main() {
@@ -21,21 +21,20 @@ func main() {
 
 	switch selectedDay {
 	case 1:
-		day1.Run()
+		day01.Run()
 	case 2:
-		day2.Run()
+		day02.Run()
 	case 3:
-		day3.Run()
+		day03.Run()
 	case 4:
-		day4.Run()
+		day04.Run()
 	case 5:
-		day5.Run()
+		day05.Run()
 	case 6:
-		day6.Run()
+		day06.Run()
 	case 7:
-		day7.Run()
+		day07.Run()
 	default:
-		println("Unknown option")
 	}
 
 }
