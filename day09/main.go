@@ -3,6 +3,7 @@ package day09
 import (
 	"fmt"
 	"os"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -19,6 +20,7 @@ func Run() {
 	lines := utils.ReadFile(filepath)
 
 	utils.RunPart(part1, 1, lines)
+	utils.RunPart(part2, 2, lines)
 }
 
 func getNextLayer(layer []int) ([]int, bool) {
@@ -69,7 +71,7 @@ func buildPyramid(pyramid [][]int) [][]int {
 	return pyramid
 }
 
-func extrapolatePyramid(pyramid [][]int) [][]int {
+func extrapolatePyramid(pyramid [][]int, fn func(int, int) int) [][]int {
 	pyramid[len(pyramid)-1] = append(pyramid[len(pyramid)-1], 0)
 	for index := len(pyramid) - 2; index >= 0; index-- {
 		prevLayer := pyramid[index+1]
@@ -78,7 +80,9 @@ func extrapolatePyramid(pyramid [][]int) [][]int {
 		layer := pyramid[index]
 		lastValue := layer[len(layer)-1]
 
-		layer = append(layer, lastValue+lastDiff)
+		newValue := fn(lastValue, lastDiff)
+
+		layer = append(layer, newValue)
 
 		pyramid[index] = layer
 	}
@@ -91,7 +95,23 @@ func processLine(line string) int {
 
 	pyramid = buildPyramid(pyramid)
 
-	pyramid = extrapolatePyramid(pyramid)
+	add := func(i1, i2 int) int { return i1 + i2 }
+	pyramid = extrapolatePyramid(pyramid, add)
+
+	return pyramid[0][len(pyramid[0])-1]
+}
+
+func processLine2(line string) int {
+	pyramid := parseLine(line)
+
+	pyramid = buildPyramid(pyramid)
+
+	for index := range pyramid {
+		slices.Reverse(pyramid[index])
+	}
+
+	subtract := func(i1, i2 int) int { return i1 - i2 }
+	pyramid = extrapolatePyramid(pyramid, subtract)
 
 	return pyramid[0][len(pyramid[0])-1]
 }
@@ -102,7 +122,7 @@ func processAllLines(lines []string, fn func(string) int) int {
 	c := make(chan int, len(lines))
 	for _, line := range lines {
 		go func(line string) {
-			c <- processLine(line)
+			c <- fn(line)
 		}(line)
 	}
 
@@ -115,6 +135,12 @@ func processAllLines(lines []string, fn func(string) int) int {
 
 func part1(lines []string) int {
 	sum := processAllLines(lines, processLine)
+
+	return sum
+}
+
+func part2(lines []string) int {
+	sum := processAllLines(lines, processLine2)
 
 	return sum
 }
