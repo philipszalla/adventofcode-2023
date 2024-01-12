@@ -36,7 +36,7 @@ func getNextLayer(layer []int) ([]int, bool) {
 	return nextLayer, end
 }
 
-func processLine(line string) int {
+func parseLine(line string) [][]int {
 	pyramid := [][]int{}
 	pyramid = append(pyramid, []int{})
 
@@ -51,7 +51,10 @@ func processLine(line string) int {
 		pyramid[0] = append(pyramid[0], number)
 	}
 
-	// Get all other layers
+	return pyramid
+}
+
+func buildPyramid(pyramid [][]int) [][]int {
 	for {
 		layer := pyramid[len(pyramid)-1]
 		nextLayer, end := getNextLayer(layer)
@@ -63,7 +66,10 @@ func processLine(line string) int {
 		}
 	}
 
-	// Extrapolate
+	return pyramid
+}
+
+func extrapolatePyramid(pyramid [][]int) [][]int {
 	pyramid[len(pyramid)-1] = append(pyramid[len(pyramid)-1], 0)
 	for index := len(pyramid) - 2; index >= 0; index-- {
 		prevLayer := pyramid[index+1]
@@ -77,10 +83,20 @@ func processLine(line string) int {
 		pyramid[index] = layer
 	}
 
+	return pyramid
+}
+
+func processLine(line string) int {
+	pyramid := parseLine(line)
+
+	pyramid = buildPyramid(pyramid)
+
+	pyramid = extrapolatePyramid(pyramid)
+
 	return pyramid[0][len(pyramid[0])-1]
 }
 
-func part1(lines []string) int {
+func processAllLines(lines []string, fn func(string) int) int {
 	sum := 0
 
 	c := make(chan int, len(lines))
@@ -93,6 +109,12 @@ func part1(lines []string) int {
 	for index := 0; index < len(lines); index++ {
 		sum += <-c
 	}
+
+	return sum
+}
+
+func part1(lines []string) int {
+	sum := processAllLines(lines, processLine)
 
 	return sum
 }
