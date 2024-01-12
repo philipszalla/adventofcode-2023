@@ -12,6 +12,7 @@ import (
 	"github.com/philipszalla/adventofcode-2023/day06"
 	"github.com/philipszalla/adventofcode-2023/day07"
 	"github.com/philipszalla/adventofcode-2023/day08"
+	"github.com/philipszalla/adventofcode-2023/day09"
 )
 
 func main() {
@@ -37,6 +38,8 @@ func main() {
 		day07.Run()
 	case 8:
 		day08.Run()
+	case 9:
+		day09.Run()
 	default:
 	}
 
