@@ -57,35 +57,58 @@ func part1(lines []string) int {
 	return count
 }
 
+func euclid(a, b int) int {
+	for b != 0 {
+		a, b = b, a%b
+	}
+
+	return a
+}
+
+func leastCommonMultiple(a, b int) int {
+	return (a * b) / euclid(a, b)
+}
+
 func part2(lines []string) int {
 	schema, mapDict := parse(lines)
 
-	positions := []string{}
+	starts := []string{}
 	for start := range mapDict {
 		if strings.HasSuffix(start, "A") {
-			positions = append(positions, start)
+			starts = append(starts, start)
+		}
+	}
+	c := make(chan int, len(starts))
+
+	for index, position := range starts {
+		go func(index int, position string) {
+			count := 0
+			for !strings.HasSuffix(position, "Z") {
+				directionIndex := count % len(schema)
+				direction := schema[directionIndex]
+
+				position = getNextPosition(mapDict, position, direction)
+				starts[index] = position
+
+				count++
+			}
+
+			c <- count
+		}(index, position)
+	}
+
+	counts := make([]int, len(starts))
+	for index := range counts {
+		counts[index] = <-c
+	}
+
+	sum := counts[0]
+
+	if len(counts) > 1 {
+		for _, count := range counts[1:] {
+			sum = leastCommonMultiple(sum, count)
 		}
 	}
 
-	count := 0
-	for {
-		directionIndex := count % len(schema)
-		direction := schema[directionIndex]
-
-		end := true
-		for index, position := range positions {
-			position = getNextPosition(mapDict, position, direction)
-			positions[index] = position
-
-			end = end && strings.HasSuffix(position, "Z")
-		}
-
-		count++
-
-		if end {
-			break
-		}
-	}
-
-	return count
+	return sum
 }
